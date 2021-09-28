@@ -28,3 +28,16 @@ def test_pred_virginica():
 
 
 
+#New Test case included to imporve the codecoverage
+def test_retrain():
+    # defining a sample payload for the testcase
+    payload = [{'sepal_length': 5.9,
+               'sepal_width': 3.0,
+               'petal_length': 5.1,
+               'petal_width': 1.8,
+               'flower_class': 'Iris Virginica'}]
+    with TestClient(app) as client:
+        response = client.post("/feedback_loop", json=payload)
+        # asserting the correct response is received
+        assert response.status_code == 200
+        assert response.json() == {"detail": "Feedback loop successful"}
